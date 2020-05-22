@@ -108,20 +108,20 @@ public class VueControleur extends Application {
         hboxTop.setStyle("-fx-background-color: #000000;");
 
         Button btnSave = new Button("Save");
-        btnSave.setTooltip(new Tooltip("Sauvegarder niveau"));
+        btnSave.setTooltip(new Tooltip("Save level"));
         btnSave.setPrefSize(100, 20);
         btnSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ButtonType btnAlertContinuer = new ButtonType("Continuer partie", ButtonBar.ButtonData.CANCEL_CLOSE);
-                ButtonType btnAlertMenu = new ButtonType("Revenir au menu", ButtonBar.ButtonData.OK_DONE);
+                ButtonType btnAlertContinuer = new ButtonType("Continue game", ButtonBar.ButtonData.CANCEL_CLOSE);
+                ButtonType btnAlertMenu = new ButtonType("Main menu", ButtonBar.ButtonData.OK_DONE);
                 Alert alert;
                 try {
                     m.jeu.saveGameToFile();    
                 } catch (IOException ex) {
                     Logger.getLogger(VueControleur.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                alert = new Alert(AlertType.INFORMATION, "Partie enregistrée\nVeuillez cliquer sur « Continuer partie » pour continuer",
+                alert = new Alert(AlertType.INFORMATION, "Game saved\nClick « Continue game » to resume level",
                         btnAlertContinuer, btnAlertMenu);
                 alert.setHeaderText(null);
                 Optional<ButtonType> result = alert.showAndWait();
@@ -131,13 +131,13 @@ public class VueControleur extends Application {
             }
         });
         
-        Text levelText = new Text("Niveau "+currentLevel);
+        Text levelText = new Text("Level "+currentLevel);
         levelText.setFont(Font.font("Verdana", 20));
         levelText.setTextAlignment(TextAlignment.CENTER);
         levelText.setFill(Color.WHITE);
         
         Button btnChangerGroup = new Button(currentGroup+" x "+currentGroup);
-        btnChangerGroup.setTooltip(new Tooltip("Changer niveau"));
+        btnChangerGroup.setTooltip(new Tooltip("Change level"));
         btnChangerGroup.setPrefSize(100, 20);
         btnChangerGroup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -154,7 +154,7 @@ public class VueControleur extends Application {
         Button btnNiveauPrec = new Button("🡸");
         btnNiveauPrec.setDisable((currentLevel == 1));
         Button btnNiveauSuiv = new Button("🡺");
-        btnNiveauPrec.setTooltip(new Tooltip("Niveau précédent"));
+        btnNiveauPrec.setTooltip(new Tooltip("Previous level"));
         btnNiveauPrec.setPrefSize(100, 20);
         btnNiveauPrec.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -171,7 +171,7 @@ public class VueControleur extends Application {
         });
         
         Button btnReinitialiser = new Button("🔄");
-        btnReinitialiser.setTooltip(new Tooltip("Réinitialiser niveau"));
+        btnReinitialiser.setTooltip(new Tooltip("Restart level"));
         btnReinitialiser.setPrefSize(100, 20);
         btnReinitialiser.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -180,7 +180,7 @@ public class VueControleur extends Application {
             }
         });
         
-        btnNiveauSuiv.setTooltip(new Tooltip("Niveau suivant"));
+        btnNiveauSuiv.setTooltip(new Tooltip("Next level"));
         btnNiveauSuiv.setPrefSize(100, 20);
         btnNiveauSuiv.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -208,7 +208,7 @@ public class VueControleur extends Application {
             @Override
             public void update(Observable o, Object arg) {
                 
-                levelText.setText("Niveau "+currentLevel);
+                levelText.setText("Level "+currentLevel);
                 btnChangerGroup.setText(currentGroup+" x "+currentGroup);
                                 
                 for (int column = 0; column < m.jeu.grille.getTaille(); column++) {
@@ -341,19 +341,19 @@ public class VueControleur extends Application {
                                 m.stopDD(fColumn, fRow);
                                 if(m.jeu.partieTerminee()){
 
-                                    ButtonType btnAlertReinitialiser = new ButtonType("Réinitialiser", ButtonBar.ButtonData.OK_DONE);
-                                    ButtonType btnAlertNiveauSuiv = new ButtonType("Niveau suivant", ButtonBar.ButtonData.CANCEL_CLOSE);
-                                    ButtonType btnAlertMenu = new ButtonType("Revenir au menu", ButtonBar.ButtonData.CANCEL_CLOSE);
+                                    ButtonType btnAlertReinitialiser = new ButtonType("Restart", ButtonBar.ButtonData.OK_DONE);
+                                    ButtonType btnAlertNiveauSuiv = new ButtonType("Next level", ButtonBar.ButtonData.CANCEL_CLOSE);
+                                    ButtonType btnAlertMenu = new ButtonType("Main menu", ButtonBar.ButtonData.CANCEL_CLOSE);
                                     Alert alert;
 
                                     if(currentLevel >= 4){
-                                        alert = new Alert(AlertType.INFORMATION, "Bravo vous avez terminé la partie 🎉🎊\nVeuillez cliquer sur « Revenir au menu » pour continuer",
+                                        alert = new Alert(AlertType.INFORMATION, "Bravo! You won this level 🎉🎊\nClick on « Main menu » to continue",
                                             btnAlertReinitialiser, btnAlertMenu);
                                     }else{
-                                        alert = new Alert(AlertType.INFORMATION, "Bravo vous avez terminé la partie 🎉🎊\nVeuillez cliquer sur « Niveau suivant » pour continuer",
+                                        alert = new Alert(AlertType.INFORMATION, "Bravo! You won this level 🎉🎊\nClick on « Next level » to continue",
                                             btnAlertReinitialiser, btnAlertNiveauSuiv);
                                     }
-                                    alert.setTitle("Partie gagnée!");
+                                    alert.setTitle("You won!");
                                     alert.setHeaderText(null);
                                     Optional<ButtonType> result = alert.showAndWait();                                        
                                     
@@ -453,7 +453,7 @@ public class VueControleur extends Application {
     public void start(Stage stage) {
         
         //Scene 1
-        Button group3 = new Button("Grille 3 x 3");
+        Button group3 = new Button("Grid 3 x 3");
         group3.setStyle("-fx-font-size:23");
         group3.setPrefSize(150, 30);
         group3.setOnAction(new EventHandler<ActionEvent>() {
@@ -467,7 +467,7 @@ public class VueControleur extends Application {
             }
         });
         
-        Button group4= new Button("Grille 4 x 4");
+        Button group4= new Button("Grid 4 x 4");
         group4.setStyle("-fx-font-size:23");
         group4.setPrefSize(150, 30);
         group4.setOnAction(new EventHandler<ActionEvent>() {
@@ -480,7 +480,7 @@ public class VueControleur extends Application {
                 stage.setScene(scene);
             }
         });
-        Button group5 = new Button("Grille 5 x 5");
+        Button group5 = new Button("Grid 5 x 5");
         group5.setStyle("-fx-font-size:23");
         group5.setPrefSize(150, 30);
         group5.setOnAction(new EventHandler<ActionEvent>() {
@@ -500,7 +500,7 @@ public class VueControleur extends Application {
         hBoxTopPane2.setAlignment(Pos.CENTER);
         hBoxTopPane2.setStyle("-fx-background-color: #000000;");
 
-        Text textTitre = new Text("Casse-tête - Lignes");
+        Text textTitre = new Text("Flow Free");
         textTitre.setFont(Font.font("Verdana", 40));
         textTitre.setTextAlignment(TextAlignment.CENTER);
         textTitre.setFill(Color.WHITE);
@@ -520,12 +520,12 @@ public class VueControleur extends Application {
         vBoxBottomPane2.setAlignment(Pos.CENTER);
         vBoxBottomPane2.setStyle("-fx-background-color: #000000;");
 
-        Text textCredits = new Text("Khaled ABDRABO 11713323\n Mohamed Salem MESSOUD 11714033");
+        Text textCredits = new Text("Khaled ABDRABO\n Mohamed Salem MESSOUD");
         textCredits.setFont(Font.font("Verdana", 15));
         textCredits.setTextAlignment(TextAlignment.CENTER);
         textCredits.setFill(Color.WHITE);
         
-        Text textCredits2 = new Text("Projet LIFAP7 - POO, 2019");
+        Text textCredits2 = new Text("Automne Semester, 2019");
         textCredits2.setFont(Font.font("Verdana", 15));
         textCredits2.setTextAlignment(TextAlignment.CENTER);
         textCredits2.setFill(Color.WHITE);
@@ -540,7 +540,7 @@ public class VueControleur extends Application {
         scene2= new Scene(pane2,450,500);
         scene2.getStylesheets().add("mvc/game.css");
         
-        stage.setTitle("Projet LIFAP7");
+        stage.setTitle("Flow Free");
         stage.setResizable(false);
         stage.setScene(scene2);
         stage.show();
